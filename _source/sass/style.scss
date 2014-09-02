@@ -1,0 +1,12 @@
+// import the zurb foundation settings and library include
+@import "foundation/settings";
+@import "foundation/foundation";
+
+// import each module in the order they should be compiled (typically typography > layout > sections > special pages > widgets > shame)
+@import "modules/type";
+@import "modules/helpers";
+@import "modules/layout";
+@import "modules/feature_image";
+@import "modules/header";
+@import "modules/topbar_override";
+@import "modules/gravity_forms_override";

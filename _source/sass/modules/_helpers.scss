@@ -1,0 +1,36 @@
+/*--------------------------------------------------------------
+alignments
+--------------------------------------------------------------*/
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+/*--------------------------------------------------------------
+clearings
+--------------------------------------------------------------*/
+.clear:before,
+.clear:after {
+	content: '';
+	display: table;
+}
+
+.clear:after {
+	clear: both;
+}
+
+/*
+additional media queries
+*/
+$large-down: "#{$screen} and (max-width:#{lower-bound($large-range)})";

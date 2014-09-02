@@ -1,0 +1,37 @@
+// CUSTOM LAYOUT INCLUDING GENERAL PAGE DESIGN
+
+// used for the wp editor only
+body#tinymce.wp-editor {
+    margin: 20px;
+}
+
+body {
+
+	@media #{$large-down} {
+		padding-top:90px;
+	}
+}
+
+.header-anchor {
+	position:relative;
+	top: -90px;
+	display: block;
+	visibility:hidden;
+}
+
+footer.site-footer {
+
+	background-color: #ccc;
+
+	.site-info {
+		height: auto;
+		text-align:center;
+		padding: 10px;
+
+		img.social {
+			max-width: 100px;
+			max-height: 100px;
+			margin: 0 15px;
+		}
+	}
+}

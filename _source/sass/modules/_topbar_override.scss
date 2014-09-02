@@ -1,0 +1,29 @@
+.top-bar {
+
+	text-align:center;
+
+	.top-bar-section {
+
+		display:inline-block;
+
+		ul {
+			li > a {
+				text-shadow: #000 1px 1px 1px;
+			}
+		}
+
+		@media #{$large-down} {
+			width: 100%;
+		}
+	}
+
+	@include single-transition(height, 500ms, ease);
+
+}
+
+// expanded topbar (mobile)
+.top-bar.expanded {
+
+	height: rem-calc(335);
+
+}
