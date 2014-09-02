@@ -1,7 +1,5 @@
 _assets
 _source/_foundation
-_source/sass/foundation/_foundation.scss
-_source/sass/foundation/_settings.scss
 _source/Gemfile.lock
 *.sass_cache*
 *node_modules*
