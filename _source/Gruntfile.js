@@ -21,7 +21,8 @@ module.exports = function(grunt) {
 				src: [
 					'js/frameworks/*.js',
 					'<%= pkg.foundationPath %>/js/foundation/foundation.js',
-					'<%= pkg.foundationPath %>/js/foundation/*.js', // or alternatively just list out the modules you want
+					//'<%= pkg.foundationPath %>/js/foundation/*.js', // or alternatively just list out the modules you want
+					'<%= pkg.foundationPath %>/js/foundation/foundation.topbar.js', // or alternatively just list out the modules you want
 					'js/plugins/*.js',
 					'js/site/*.js'
 					],

@@ -67,6 +67,9 @@ var SiteJS = (function(siteJS, $) {
 	siteJS.init = function() {
 		var self = this;
 
+		// run this code ON ALL THE THINGS! (no matter what kind of page/post it is)
+		local.allTheThings();
+
 		// SITE_JSON
 		// this is a php generated global object that should exist on every page in the site. it's used
 		// to store global data which helps define settings or conditional logic for page execution
@@ -92,9 +95,6 @@ var SiteJS = (function(siteJS, $) {
 		if (typeof(self[SITE_JSON.postNameInit]) == typeof(Function)) {
 			self[SITE_JSON.postNameInit].apply();
 		}
-
-		// run this code ON ALL THE THINGS! (no matter what kind of page/post it is)
-		local.allTheThings();
 
 	};
 
