@@ -22,6 +22,12 @@ class Theme {
 
 		// add editor css
 		add_editor_style( 'css/style.css' );
+
+		// tell gravity forms to load resources in the footer
+		add_filter('gform_init_scripts_footer', '__return_true');
+		// wrap the dirty inline javascript that gravity forms produces in a dom ready listener
+		add_filter( 'gform_cdata_open', array($this, 'wrap_gform_cdata_open') );
+		add_filter( 'gform_cdata_close', array($this, 'wrap_gform_cdata_close') );
 	}
 
 	public function load_resources() {
@@ -154,6 +160,16 @@ class Theme {
 		}
 
 		return $commit_hash;
+	}
+
+	public function wrap_gform_cdata_open( $content = '' ) {
+		$content = 'document.addEventListener( "DOMContentLoaded", function() { ';
+		return $content;
+	}
+
+	public function wrap_gform_cdata_close( $content = '' ) {
+		$content = ' }, false );';
+		return $content;
 	}
 
 }
