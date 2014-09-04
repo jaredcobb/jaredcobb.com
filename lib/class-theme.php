@@ -210,7 +210,7 @@ class Theme {
 								$standard_image = wp_get_attachment_url($attachment_id);
 
 								if ($mobile_image && $standard_image) {
-									$interchange_tag = ' data-interchange="[' . $mobile_image[0] . ', (default)], [' . $standard_image . ', (large)]"';
+									$interchange_tag = ' data-interchange="[' . $mobile_image[0] . ', (default)], [' . $standard_image . ', (medium)]"';
 									$content = substr_replace($content, 'data-old-', $src_full_content_start_pos, 0);
 									$content = substr_replace($content, $interchange_tag, $image_tag_start_pos + 4, 0);
 								}
