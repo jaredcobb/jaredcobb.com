@@ -1,0 +1,10 @@
+// used for the wp editor only
+// import the zurb foundation settings and library include
+@import "foundation/settings";
+@import "foundation/foundation";
+@import "modules/type";
+@import "modules/helpers";
+
+body#tinymce.wp-editor {
+    margin: 20px;
+}

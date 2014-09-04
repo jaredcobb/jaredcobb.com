@@ -22,7 +22,7 @@ class Theme {
 		add_filter('wp_generate_attachment_metadata', array($this, 'create_effect_image'));
 
 		// add editor css
-		add_editor_style( 'css/style.css' );
+		add_editor_style( 'css/style-editor.css' );
 
 		// tell gravity forms to load resources in the footer
 		add_filter('gform_init_scripts_footer', '__return_true');
