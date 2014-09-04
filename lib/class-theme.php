@@ -13,6 +13,7 @@ class Theme {
 	public function setup() {
 		$this->cleanup_head();
 		$this->add_more_theme_support();
+		$this->register_shortcodes();
 
 		// cleaning up random code around images
 		add_filter( 'the_content', array($this, 'filter_ptags_on_images') );
@@ -115,6 +116,18 @@ class Theme {
 		add_image_size('mobile-medium', 1024, 768);
 	}
 
+	protected function register_shortcodes() {
+		add_shortcode('script', array($this, 'shortcode_insert_script_tag'));
+	}
+
+	public function shortcode_insert_script_tag($atts) {
+		$a = shortcode_atts( array(
+			'src' => ''
+		), $atts );
+
+		return '<script src="' . $a['src'] . '"></script>';
+	}
+
 	public function create_effect_image($meta) {
 		$file = wp_upload_dir();
 		$file = trailingslashit($file['path']).$meta['sizes']['main-feature-effect']['file'];
@@ -184,7 +197,6 @@ class Theme {
 			if (is_array($image_matches[0]) && !empty($image_matches[0])) {
 
 				// setup helper values
-				$content_length = strlen($content);
 				$image_matches[0] = array_reverse($image_matches[0]);
 				$uploads_path = '/wp-content/uploads/';
 
@@ -233,62 +245,62 @@ class Theme {
 
 	protected function get_attachment_id( $url ) {
 
-        $dir = wp_upload_dir();
+		$dir = wp_upload_dir();
 
-        // baseurl never has a trailing slash
-        if ( false === strpos( $url, $dir['baseurl'] . '/' ) ) {
-            // URL points to a place outside of upload directory
-            return false;
-        }
+		// baseurl never has a trailing slash
+		if ( false === strpos( $url, $dir['baseurl'] . '/' ) ) {
+			// URL points to a place outside of upload directory
+			return false;
+		}
 
-        $file  = basename( $url );
-        $query = array(
-            'post_type'  => 'attachment',
-            'fields'     => 'ids',
-            'meta_query' => array(
-                array(
-                    'value'   => $file,
-                    'compare' => 'LIKE',
-                ),
-            )
-        );
+		$file  = basename( $url );
+		$query = array(
+				'post_type'  => 'attachment',
+				'fields'     => 'ids',
+				'meta_query' => array(
+					array(
+						'value'   => $file,
+						'compare' => 'LIKE',
+						),
+					)
+				);
 
-        $query['meta_query'][0]['key'] = '_wp_attached_file';
+		$query['meta_query'][0]['key'] = '_wp_attached_file';
 
-        // query attachments
-        $ids = get_posts( $query );
+		// query attachments
+		$ids = get_posts( $query );
 
-        if ( ! empty( $ids ) ) {
+		if ( ! empty( $ids ) ) {
 
-            foreach ( $ids as $id ) {
+			foreach ( $ids as $id ) {
 
-                // first entry of returned array is the URL
-                if ( $url === array_shift( wp_get_attachment_image_src( $id, 'full' ) ) )
-                    return $id;
-            }
-        }
+				// first entry of returned array is the URL
+				if ( $url === array_shift( wp_get_attachment_image_src( $id, 'full' ) ) )
+					return $id;
+			}
+		}
 
-        $query['meta_query'][0]['key'] = '_wp_attachment_metadata';
+		$query['meta_query'][0]['key'] = '_wp_attachment_metadata';
 
-        // query attachments again
-        $ids = get_posts( $query );
+		// query attachments again
+		$ids = get_posts( $query );
 
-        if ( empty( $ids) )
-            return false;
+		if ( empty( $ids) )
+			return false;
 
-        foreach ( $ids as $id ) {
+		foreach ( $ids as $id ) {
 
-            $meta = wp_get_attachment_metadata( $id );
+			$meta = wp_get_attachment_metadata( $id );
 
-            foreach ( $meta['sizes'] as $size => $values ) {
+			foreach ( $meta['sizes'] as $size => $values ) {
 
-                if ( $values['file'] === $file && $url === array_shift( wp_get_attachment_image_src( $id, $size ) ) )
-                    return $id;
-            }
-        }
+				if ( $values['file'] === $file && $url === array_shift( wp_get_attachment_image_src( $id, $size ) ) )
+					return $id;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 }
  ?>
