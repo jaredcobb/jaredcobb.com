@@ -26,7 +26,8 @@ var SiteJS = (function(siteJS, $) {
 			$(document).foundation({
 				topbar : {
 					scrolltop: true
-				}
+				},
+				interchange : {}
 			});
 
 			/*

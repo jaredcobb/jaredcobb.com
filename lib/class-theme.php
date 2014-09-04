@@ -28,6 +28,9 @@ class Theme {
 		// wrap the dirty inline javascript that gravity forms produces in a dom ready listener
 		add_filter( 'gform_cdata_open', array($this, 'wrap_gform_cdata_open') );
 		add_filter( 'gform_cdata_close', array($this, 'wrap_gform_cdata_close') );
+
+		// build an interchange image tag for all uploaded images in the content
+		add_filter( 'the_content', array($this, 'replace_images_with_interchange') );
 	}
 
 	public function load_resources() {
@@ -108,6 +111,8 @@ class Theme {
 		set_post_thumbnail_size(125, 125, true);
 		add_image_size('main-feature', 1680, 900, array( 'center', 'center' ));
 		add_image_size('main-feature-effect', 1680, 899, array( 'center', 'center' ));
+		add_image_size('mobile-small', 640, 480);
+		add_image_size('mobile-medium', 1024, 768);
 	}
 
 	public function create_effect_image($meta) {
@@ -171,6 +176,119 @@ class Theme {
 		$content = ' }, false );';
 		return $content;
 	}
+
+	public function replace_images_with_interchange($content) {
+		$image_matches = array();
+		if (preg_match_all("/<img[^>]*./", $content, $image_matches, PREG_OFFSET_CAPTURE)) {
+
+			if (is_array($image_matches[0]) && !empty($image_matches[0])) {
+
+				// setup helper values
+				$content_length = strlen($content);
+				$image_matches[0] = array_reverse($image_matches[0]);
+				$uploads_path = '/wp-content/uploads/';
+
+				foreach ($image_matches[0] as $image_collection) {
+
+					if (is_array($image_collection) && !empty($image_collection)) {
+
+						$image_tag = $image_collection[0];
+						$image_tag_start_pos = $image_collection[1];
+
+						if (strpos($image_tag, $uploads_path)) {
+							$src_full_content_start_pos = strpos($content, 'src="', intval($image_tag_start_pos));
+							$src_start_pos = strpos($image_tag, 'src="');
+							$src_end_pos = strpos($image_tag, '"', ($src_start_pos + 5));
+							$src_value = substr($image_tag, ($src_start_pos + 5), ($src_end_pos - $src_start_pos - 5));
+
+							$attachment_id = $this->get_attachment_id($src_value);
+
+							if ($attachment_id) {
+
+								// get mobile and original size
+								$mobile_image = wp_get_attachment_image_src($attachment_id, 'mobile-small');
+								$standard_image = wp_get_attachment_url($attachment_id);
+
+								if ($mobile_image && $standard_image) {
+									$interchange_tag = ' data-interchange="[' . $mobile_image[0] . ', (default)], [' . $standard_image . ', (large)]"';
+									$content = substr_replace($content, 'data-old-', $src_full_content_start_pos, 0);
+									$content = substr_replace($content, $interchange_tag, $image_tag_start_pos + 4, 0);
+								}
+
+							}
+
+						}
+
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return $content;
+	}
+
+	protected function get_attachment_id( $url ) {
+
+        $dir = wp_upload_dir();
+
+        // baseurl never has a trailing slash
+        if ( false === strpos( $url, $dir['baseurl'] . '/' ) ) {
+            // URL points to a place outside of upload directory
+            return false;
+        }
+
+        $file  = basename( $url );
+        $query = array(
+            'post_type'  => 'attachment',
+            'fields'     => 'ids',
+            'meta_query' => array(
+                array(
+                    'value'   => $file,
+                    'compare' => 'LIKE',
+                ),
+            )
+        );
+
+        $query['meta_query'][0]['key'] = '_wp_attached_file';
+
+        // query attachments
+        $ids = get_posts( $query );
+
+        if ( ! empty( $ids ) ) {
+
+            foreach ( $ids as $id ) {
+
+                // first entry of returned array is the URL
+                if ( $url === array_shift( wp_get_attachment_image_src( $id, 'full' ) ) )
+                    return $id;
+            }
+        }
+
+        $query['meta_query'][0]['key'] = '_wp_attachment_metadata';
+
+        // query attachments again
+        $ids = get_posts( $query );
+
+        if ( empty( $ids) )
+            return false;
+
+        foreach ( $ids as $id ) {
+
+            $meta = wp_get_attachment_metadata( $id );
+
+            foreach ( $meta['sizes'] as $size => $values ) {
+
+                if ( $values['file'] === $file && $url === array_shift( wp_get_attachment_image_src( $id, $size ) ) )
+                    return $id;
+            }
+        }
+
+        return false;
+    }
 
 }
  ?>
