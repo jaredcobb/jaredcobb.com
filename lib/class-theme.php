@@ -32,6 +32,9 @@ class Theme {
 
 		// build an interchange image tag for all uploaded images in the content
 		add_filter( 'the_content', array($this, 'replace_images_with_interchange') );
+
+		// get rid of the anchor in the read more link
+		add_filter('the_content_more_link', array($this, 'remove_more_anchor'));
 	}
 
 	public function load_resources() {
@@ -300,6 +303,17 @@ class Theme {
 		}
 
 		return false;
+	}
+
+	public function remove_more_anchor($link) {
+		$offset = strpos($link, '#more-');
+		if ($offset) {
+			$end = strpos($link, '"',$offset);
+		}
+		if ($end) {
+			$link = substr_replace($link, '', $offset, $end-$offset);
+		}
+		return $link;
 	}
 
 }
