@@ -1,7 +1,5 @@
 // CUSTOM LAYOUT INCLUDING GENERAL PAGE DESIGN
-
 body {
-
 	@media #{$large-down} {
 		padding-top:90px;
 	}
@@ -14,8 +12,20 @@ body {
 	visibility:hidden;
 }
 
-header.entry-content {
+div.entry-content, footer.entry-footer {
 	margin-bottom: 30px;
+}
+
+article {
+
+	footer.entry-footer {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 30px;
+	}
+
+	&:last-child footer.entry-footer {
+		border-bottom: none;
+	}
 }
 
 footer.site-footer {

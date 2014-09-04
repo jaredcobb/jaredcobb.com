@@ -50,9 +50,13 @@ echo $template->get_dynamic_css();
 
 			<div class="feature">
 
-			  <div class="header-image-normal"></div>
+			  <div class="header-image-normal">
+				 <div class="arrow-guide bounce"></div>
+			 </div>
 
 			  <div class="header-image-effect"></div>
+
+
 
 			  <div class="title">
 

@@ -5,6 +5,7 @@
 // import each module in the order they should be compiled (typically typography > layout > sections > special pages > widgets > shame)
 @import "modules/type";
 @import "modules/helpers";
+@import "modules/svgs";
 @import "modules/layout";
 @import "modules/feature_image";
 @import "modules/header";

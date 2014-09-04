@@ -53,11 +53,13 @@ var SiteJS = (function(siteJS, $) {
 				var navWrapper = $(".nav-wrapper");
 				var content = $(".content");
 				var feature = $(".feature");
+				var arrowGuide = $(".arrow-guide");
 
 				$(window).on("resize", function() {
 					var vh = $(window).innerHeight();
 					navWrapper.css("top", vh - topbarHeight);
 					content.css("top", vh - topbarHeight);
+					arrowGuide.css("top", vh - topbarHeight - 110);
 					feature.css("height", vh);
 				}).resize();
 			}

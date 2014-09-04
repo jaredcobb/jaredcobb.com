@@ -11,6 +11,14 @@
 
 			<header class="entry-header">
 
+				<?php
+				global $output_content_anchor;
+				if ($output_content_anchor) {
+					echo '<p><a href="#begin-content" class="content-anchor" name="begin-content"></a></p>';
+					$output_content_anchor = false;
+				}
+				?>
+
 				<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 				<?php if ( 'post' == get_post_type() ) : ?>
