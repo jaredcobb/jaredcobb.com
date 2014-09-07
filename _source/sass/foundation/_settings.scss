@@ -208,13 +208,13 @@ $header-font-weight: bold;
 
 // We use these to control header font sizes
 
-$header-increase-amount: 28;
+$header-increase-amount: 24;
 
 $h1-font-size: rem-calc(44 + $header-increase-amount);
 $h2-font-size: rem-calc(37 + $header-increase-amount);
 $h3-font-size: rem-calc(27 + $header-increase-amount);
 $h4-font-size: rem-calc(23 + $header-increase-amount);
-$h5-font-size: rem-calc(18 + $header-increase-amount);
+$h5-font-size: rem-calc(10 + $header-increase-amount);
 $h6-font-size: 1rem;
 
 // We use these to control header size reduction on small screens
