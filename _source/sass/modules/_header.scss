@@ -84,6 +84,7 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	opacity: 0.4;
 }
 
 .home .arrow-guide {
@@ -91,5 +92,5 @@
 }
 
 .bounce {
-	animation: bounce 4s infinite;
+	animation: bounce 4s 1s 5;
 }
