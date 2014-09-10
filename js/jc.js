@@ -1,4 +1,4 @@
-/*! jc - v0.1.0 - 2014-09-08*/
+/*! jc - v0.1.0 - 2014-09-10*/
 // replace this file and fill this subfolder with things like jquery, angular, etc
 
 (function ($, window, document, undefined) {
@@ -1488,7 +1488,7 @@ var SiteJS = (function(siteJS, $) {
 				}
 				e.preventDefault();
 				var stateObj = { hash : this.hash };
-				history.pushState(stateObj);
+				history.pushState(stateObj, '');
 				siteJS.animateClicks(stateObj);
 			});
 

@@ -8,7 +8,7 @@ var SiteJS = (function(siteJS, $) {
 				}
 				e.preventDefault();
 				var stateObj = { hash : this.hash };
-				history.pushState(stateObj);
+				history.pushState(stateObj, '');
 				siteJS.animateClicks(stateObj);
 			});
 
