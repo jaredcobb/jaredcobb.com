@@ -115,6 +115,8 @@ class Theme {
 		set_post_thumbnail_size(125, 125, true);
 		add_image_size('main-feature', 1680, 900, array( 'center', 'center' ));
 		add_image_size('main-feature-effect', 1680, 899, array( 'center', 'center' ));
+		add_image_size('main-feature-subpage', 1680, 600, array( 'center', 'center' ));
+		add_image_size('main-feature-effect-subpage', 1680, 599, array( 'center', 'center' ));
 		add_image_size('mobile-small', 640, 480);
 		add_image_size('mobile-medium', 1024, 768);
 	}
@@ -133,7 +135,7 @@ class Theme {
 
 	public function create_effect_image($meta) {
 		$file = wp_upload_dir();
-		$file = trailingslashit($file['path']).$meta['sizes']['main-feature-effect']['file'];
+		$file = trailingslashit($file['path']).$meta['sizes']['main-feature-effect-subpage']['file'];
 		list($orig_w, $orig_h, $orig_type) = @getimagesize($file);
 
 		if (!empty($orig_type)) {

@@ -19,8 +19,10 @@ var SiteJS = (function(siteJS, $) {
 		// executed on everything (used for more global initilizations)
 		allTheThings : function() {
 
-			// transition one image to another on scroll
-			siteJS.headerEffect();
+			// transition one image to another on scroll, also display parallax
+			skrollr.init({
+				forceHeight: false
+			});
 
 			// initialize foundation
 			$(document).foundation({
@@ -30,39 +32,6 @@ var SiteJS = (function(siteJS, $) {
 				interchange : {}
 			});
 
-			/*
-			* Webkit doesn't support viewport units in calc() expressions:
-			* https://bugs.webkit.org/show_bug.cgi?id=94158 and
-			* https://code.google.com/p/chromium/issues/detail?id=168840;
-			* Blink added support with Revision 172971
-			*
-			* When Safari gets its crap together I'll get rid of this
-			* Mobile Safari is also buggy with vh & vw units, but js will help until then. THE FUTURE IS NOW!
-			*/
-
-			// i know, i know, ua sniffing is the debil!
-			var ua = navigator.userAgent.toLowerCase();
-			var isSafari = false;
-
-			if(/safari/.test(ua) && !/chrome/.test(ua)) {
-				isSafari = true;
-			}
-
-			if (isSafari) {
-				var topbarHeight = 90; // change this if i ever resize the nav bar
-				var navWrapper = $(".nav-wrapper");
-				var content = $(".content");
-				var feature = $(".feature");
-				var arrowGuide = $(".arrow-guide");
-
-				$(window).on("resize", function() {
-					var vh = $(window).innerHeight();
-					navWrapper.css("top", vh - topbarHeight);
-					content.css("top", vh - topbarHeight);
-					arrowGuide.css("top", vh - topbarHeight - 110);
-					feature.css("height", vh);
-				}).resize();
-			}
 		}
 
 	};

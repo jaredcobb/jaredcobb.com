@@ -1,7 +1,125 @@
 // CUSTOM LAYOUT INCLUDING GENERAL PAGE DESIGN
 body {
+
+	// standard styles for all subpages
+
+	// add padding equal to 1/3 of the topbar height (adjust the content for the fixed topbar)
+	&.f-topbar-fixed {
+		margin-top: 90px * .66;
+	}
+
 	@media #{$large-down} {
 		padding-top:90px;
+		&.f-topbar-fixed {
+			margin-top: 0;
+		}
+	}
+
+	.header-image-wrapper {
+		height: 66%;
+		width: 100%;
+		position: fixed;
+		left: 0;
+		overflow: hidden;
+
+		&>div {
+			height: 100%;
+			top: 0;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+		}
+
+		.header-image-normal {
+			z-index:-20;
+		}
+
+		.header-image-effect {
+			z-index:-10;
+			opacity:0;
+		}
+
+	}
+
+	.wrapper {
+		height: calc(66% - 90px);
+		position: relative;
+		overflow: visible;
+		min-height: 200px;
+
+		.feature {
+			position:fixed;
+			width:100%;
+			height:100%;
+		}
+	}
+
+	.title {
+		height: 66%;
+		h1 {
+			background-image: url(../images/jaredcobb.svg);
+			background-repeat: no-repeat;
+			height: 33vh;
+			width: 40vw;
+			max-width: 460px;
+			max-height: 360px;
+			text-indent: -9999px;
+			background-size: contain;
+			margin: 0;
+			position: relative;
+			top: 7%;
+			left: 5%;
+
+			@media #{$small-only} {
+				height: 50%;
+				width: 100%;
+				top: 4%;
+				left: inherit;
+				background-position: center center;
+			}
+
+		}
+	}
+
+
+	// overrides for the home page (full size header)
+
+	&.home {
+
+		&.f-topbar-fixed {
+			margin-top: 90px;
+		}
+
+		@media #{$large-down} {
+			padding-top:90px;
+			&.f-topbar-fixed {
+				margin-top: 0;
+			}
+		}
+
+		.header-image-wrapper {
+			height: 100%;
+		}
+
+		.wrapper {
+			height: calc(100% - 90px);
+		}
+
+		.title {
+			height: 100%;
+
+			h1 {
+				height: 48vh;
+				width: 40vw;
+				max-width: 460px;
+				max-height: 360px;
+			}
+		}
+
 	}
 }
 

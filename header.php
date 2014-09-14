@@ -28,6 +28,7 @@ $template = new Template();
 <?php echo $template->get_favicon_meta(); ?>
 <?php
 echo $template->get_dynamic_css();
+$skrollr_atts = $template->get_header_skrollr_atts();
 ?>
 <?php wp_head(); ?>
 <script>
@@ -43,6 +44,10 @@ echo $template->get_dynamic_css();
 </head>
 
 <body <?php body_class(); ?>>
+<div class="header-image-wrapper">
+	<div class="header-image-normal" <?php echo $skrollr_atts['normal']; ?>></div>
+	<div class="header-image-effect" <?php echo $skrollr_atts['effect']; ?>></div>
+</div>
 
 	<div class="wrapper">
 
@@ -50,17 +55,9 @@ echo $template->get_dynamic_css();
 
 			<div class="feature">
 
-			  <div class="header-image-normal">
-				 <div class="arrow-guide bounce"></div>
-			 </div>
-
-			  <div class="header-image-effect"></div>
-
-
-
 			  <div class="title">
 
-				<h1>
+				<h1 <?php echo $skrollr_atts['logo']; ?>>
 					<?php echo esc_attr( get_bloginfo( 'title' ) ) . ' - ' . esc_attr( get_bloginfo( 'description' ) ); ?>
 				</h1>
 
@@ -68,12 +65,13 @@ echo $template->get_dynamic_css();
 
 			</div>
 
+		</header>
+
+		<div class="content">
+
 			<div class="nav-wrapper">
 
 				<?php $template->display_primary_menu(); ?>
 
 			</div>
 
-		</header>
-
-		<div class="content">
