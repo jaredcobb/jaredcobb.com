@@ -49,7 +49,7 @@ $skrollr_atts = $template->get_header_skrollr_atts();
 	<div class="header-image-effect" <?php echo $skrollr_atts['effect']; ?>></div>
 </div>
 
-	<div class="wrapper">
+	<div id="skrollr-body" class="wrapper">
 
 		<header class="site-header" role="banner">
 
