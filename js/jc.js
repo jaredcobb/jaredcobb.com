@@ -1,4 +1,4 @@
-/*! jc - v0.1.0 - 2014-09-13*/
+/*! jc - v0.1.0 - 2014-09-14*/
 // replace this file and fill this subfolder with things like jquery, angular, etc
 
 (function ($, window, document, undefined) {
@@ -1554,9 +1554,12 @@ var SiteJS = (function(siteJS, $) {
 		allTheThings : function() {
 
 			// transition one image to another on scroll, also display parallax
-			skrollr.init({
-				forceHeight: false
-			});
+			// forego animation on mobile devices
+			if (!Modernizr.touch) {
+				skrollr.init({
+					forceHeight: false
+				});
+			}
 
 			// initialize foundation
 			$(document).foundation({

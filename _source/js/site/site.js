@@ -20,9 +20,12 @@ var SiteJS = (function(siteJS, $) {
 		allTheThings : function() {
 
 			// transition one image to another on scroll, also display parallax
-			skrollr.init({
-				forceHeight: false
-			});
+			// forego animation on mobile devices
+			if (!Modernizr.touch) {
+				skrollr.init({
+					forceHeight: false
+				});
+			}
 
 			// initialize foundation
 			$(document).foundation({
