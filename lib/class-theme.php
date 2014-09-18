@@ -18,9 +18,6 @@ class Theme {
 		// cleaning up random code around images
 		add_filter( 'the_content', array($this, 'filter_ptags_on_images') );
 
-		// create a grayscale featured image
-		add_filter('wp_generate_attachment_metadata', array($this, 'create_effect_image'));
-
 		// add editor css
 		add_editor_style( 'css/style-editor.css' );
 
