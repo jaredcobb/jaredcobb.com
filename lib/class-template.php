@@ -63,16 +63,14 @@ HTML;
 		$current_ID = 0;
 		// by defualt, get the subpage size of the background images
 		$default_thumbnail_slug = 'main-feature-subpage';
-		$effect_thumbnail_slug = 'main-feature-effect-subpage';
 
 		if ( is_front_page() && is_home() ) {
-			// default homepage
+			// default homepage, not currently setup this way in my theme
 		}
 		elseif ( is_front_page() ) {
 			// static homepage
 			$current_ID = get_the_ID();
 			$default_thumbnail_slug = 'main-feature';
-			$effect_thumbnail_slug = 'main-feature-effect';
 		}
 		elseif ( is_home() ) {
 			// blog page
@@ -95,14 +93,10 @@ HTML;
 		}
 
 		$feature_image = wp_get_attachment_image_src(get_post_thumbnail_id($current_ID), $default_thumbnail_slug);
-		$feature_image_effect = wp_get_attachment_image_src(get_post_thumbnail_id($current_ID), $effect_thumbnail_slug);
 		return <<<HTML
 			<style>
 			.header-image-normal {
 				background-image:url({$feature_image[0]});
-			}
-			.header-image-effect {
-				background-image:url({$feature_image_effect[0]});
 			}
 			</style>
 HTML;
@@ -113,12 +107,10 @@ HTML;
 		$atts = array();
 		if (is_front_page()) {
 			$atts['normal'] = 'data-anchor-target=".nav-wrapper" data-center-bottom="transform: translateY(-40px);" data-bottom-bottom="transform:translateY(0px);"';
-			$atts['effect'] = 'data-anchor-target=".nav-wrapper" data-center-bottom="transform: translateY(-40px); opacity: 1;" data-bottom-bottom="transform:translateY(0px); opacity: 0;"';
 			$atts['logo'] = 'data-anchor-target=".nav-wrapper" data-top-bottom="transform: translateY(-140px);" data-bottom-bottom="transform:translateY(0px);"';
 		}
 		else {
 			$atts['normal'] = 'data-anchor-target=".nav-wrapper" data-top-bottom="transform: translateY(-60px);" data--35p-bottom="transform:translateY(0px);"';
-			$atts['effect'] = 'data-anchor-target=".nav-wrapper" data-top-bottom="transform: translateY(-60px); opacity: 1;" data--35p-bottom="transform:translateY(0px); opacity: 0;"';
 			$atts['logo'] = 'data-anchor-target=".nav-wrapper" data-top-bottom="transform: translateY(-140px);" data--35p-bottom="transform:translateY(0px);"';
 		}
 

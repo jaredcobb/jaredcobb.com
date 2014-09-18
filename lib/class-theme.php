@@ -114,9 +114,7 @@ class Theme {
 		// default thumb size
 		set_post_thumbnail_size(125, 125, true);
 		add_image_size('main-feature', 1680, 900, array( 'center', 'center' ));
-		add_image_size('main-feature-effect', 1680, 899, array( 'center', 'center' ));
 		add_image_size('main-feature-subpage', 1680, 600, array( 'center', 'center' ));
-		add_image_size('main-feature-effect-subpage', 1680, 599, array( 'center', 'center' ));
 		add_image_size('mobile-small', 640, 480);
 		add_image_size('mobile-medium', 1024, 768);
 	}
@@ -131,38 +129,6 @@ class Theme {
 		), $atts );
 
 		return '<script src="' . $a['src'] . '"></script>';
-	}
-
-	public function create_effect_image($meta) {
-		$file = wp_upload_dir();
-		$file = trailingslashit($file['path']).$meta['sizes']['main-feature-effect-subpage']['file'];
-		list($orig_w, $orig_h, $orig_type) = @getimagesize($file);
-
-		if (!empty($orig_type)) {
-			$image = wp_load_image($file);
-
-			$image = $this->apply_image_effect($image, IMG_FILTER_GAUSSIAN_BLUR, 12);
-
-			switch ($orig_type) {
-				case IMAGETYPE_GIF:
-					imagegif( $image, $file );
-					break;
-				case IMAGETYPE_PNG:
-					imagepng( $image, $file );
-					break;
-				case IMAGETYPE_JPEG:
-					imagejpeg( $image, $file );
-					break;
-			}
-		}
-		return $meta;
-	}
-
-	protected function apply_image_effect($image, $filter, $times) {
-		for ($i=0; $i<$times; $i++) {
-			imagefilter($image, $filter);
-		}
-		return $image;
 	}
 
 	protected function get_resources_version() {

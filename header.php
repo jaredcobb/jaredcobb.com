@@ -46,7 +46,6 @@ $skrollr_atts = $template->get_header_skrollr_atts();
 <body <?php body_class(); ?>>
 <div class="header-image-wrapper">
 	<div class="header-image-normal" <?php echo $skrollr_atts['normal']; ?>></div>
-	<div class="header-image-effect" <?php echo $skrollr_atts['effect']; ?>></div>
 </div>
 
 	<div class="wrapper">
