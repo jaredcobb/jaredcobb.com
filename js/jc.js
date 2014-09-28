@@ -1,4 +1,4 @@
-/*! jc - v0.1.0 - 2014-09-18*/
+/*! jc - v0.1.0 - 2014-09-28*/
 // replace this file and fill this subfolder with things like jquery, angular, etc
 
 (function ($, window, document, undefined) {
