@@ -14,7 +14,7 @@ class Foundation_Topbar_Walker extends Walker_Nav_Menu {
 		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
 	// add the class of dropdown to sub-level ul
-	function start_lvl(&$output, $depth) {
+	function start_lvl(&$output, $depth=0, $args=array()) {
 		$indent = str_repeat("\t", $depth);
 		$output .= $indent . '<ul class="dropdown">';
 	}

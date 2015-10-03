@@ -32,6 +32,15 @@ class Theme {
 
 		// get rid of the anchor in the read more link
 		add_filter('the_content_more_link', array($this, 'remove_more_anchor'));
+
+		// remove toolbar on frontend
+		add_filter('show_admin_bar', '__return_false');
+
+		// configure auto-updates
+		add_filter( 'allow_major_auto_core_updates', '__return_true' );
+		add_filter( 'auto_update_plugin', '__return_true' );
+		add_filter( 'auto_update_theme', '__return_true' );
+
 	}
 
 	public function load_resources() {
