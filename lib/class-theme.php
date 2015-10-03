@@ -252,7 +252,8 @@ class Theme {
 			foreach ( $ids as $id ) {
 
 				// first entry of returned array is the URL
-				if ( $url === array_shift( wp_get_attachment_image_src( $id, 'full' ) ) )
+				$attachment = wp_get_attachment_image_src( $id, 'full' );
+				if ( $url === $attachment[0] )
 					return $id;
 			}
 		}
