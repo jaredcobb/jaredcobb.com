@@ -12,8 +12,14 @@
 			}
 		}
 
-		@media #{$large-down} {
+		@media #{$medium-down} {
 			width: 100%;
+
+      ul {
+        li > a {
+          padding-left: 0;
+        }
+      }
 		}
 	}
 

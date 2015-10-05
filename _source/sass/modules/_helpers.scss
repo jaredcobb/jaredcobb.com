@@ -34,3 +34,4 @@ clearings
 additional media queries
 */
 $large-down: "#{$screen} and (max-width:#{lower-bound($large-range)})";
+$medium-down: "#{$screen} and (max-width:#{lower-bound($medium-range)})";
